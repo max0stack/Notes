@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"  >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="notes-app">
+        <h1>My Notes Board</h1>
+        <textarea id="text" cols="40" rows="5"></textarea>  
+        <div>
+            <label>Date:</label>
+            <input type="date" name="date" id="date">
+        </div>
+        <div>
+            <label>Time:</label>
+            <input type="time" name="time" id="time">
+        </div>
+        <button onclick="createNote()" > Create </button>
+    </div>
+
+    <div id="notes">
+        <div class="note">
+            <div id="text">
+                X
+            </div>
+            <div id="date">
+                X
+            </div>
+            <div id="time">
+                X
+            </div>
+            <button onclick="deleteNotes()">X</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
