@@ -1,0 +1,35 @@
+# Base44 sandbox environment.
+# The project is a plain static site (index.html + style.css + script.js, no build
+# step, no package manager), so the only service is a zero-dependency Node dev
+# server that serves the cloned source from the bind mount and live-reloads the
+# page on edit. No backend, database or external credentials are involved.
+services:
+  web:
+    image: node:22-alpine
+    working_dir: /app
+    command: ["node", ".base44/dev-server.mjs"]
+    environment:
+      - PORT=3000
+      - HOST=0.0.0.0
+      - SERVE_ROOT=/app
+    volumes:
+      - ./:/app
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:3000/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    restart: on-failure
+    labels:
+      base44.project: "Notes Board"
+      base44.kind: "web"
+      base44.port: "3000"
